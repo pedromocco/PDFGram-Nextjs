@@ -1,40 +1,60 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/pages/api-reference/create-next-app).
+# **PDFgram**
 
-## Getting Started
+## **Tabla de Contenidos**
+1. [Introducción](#introducción)
+2. [Características Principales](#características-principales)
+3. [Requisitos](#requisitos)
+4. [Uso](#uso)
+5. [Ejemplo](#ejemplo)
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## **Introducción**
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Esta aplicación permite a los usuarios llenar un formulario en el frontend, enviar los datos al backend para su procesamiento, generar un archivo PDF con los datos organizados en una tabla, y finalmente entregar el archivo PDF mediante un bot de Telegram.
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+Fue desarrollado pensado para la solución de una pequeña tienda de mi urbanización donde tenia problemas con el manejo de los datos de las transacciones que se hacían por transferencia, o mejor conocido en venezuela con pago móvil
 
-[API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+La aplicación fue hecha para recibir tres tipos de datos:
+1. Número de referencia de la transacción,
+2. Monto de la transacción
+3. Hora en la que se agregó la transacción a la tabla
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) instead of React pages.
+(Esta version fue desarrollada con Nextjs para la demostración de su funcionalidad)
 
-This project uses [`next/font`](https://nextjs.org/docs/pages/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+## **Características Principales**
 
-To learn more about Next.js, take a look at the following resources:
+- **Independencia de internet**: La aplicación escucha el estado del internet para detener los procesos o reanudad procesos del bot de telegram
+- **Persistencia de datos**: Los datos apenas son añadidos a la tabla, estos persisten mediante LocalStorage
+- **Opción de descargas**: Los datos al ser añadidos a la tabla, pueden ser descargados usando el mismo proceso para crear el PDF.
+- **Autoeliminado de datos en servidor**: La aplicación tiene que guardar el PDF en el servidor para que ese archivo sea procesado y enviado al bot de telegram. Sin embargo este mismo tiene la capacidad de autoeliminarse una vez el mensaje haya sido enviado.
+- **Uso en local**: Esta aplicación fue hecha pensada para usarse en local a pesar de ser hecha en tecnología web. Por lo tanto todas las características han sido por adaptaciones a uso en local
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn-pages-router) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## **Requisitos**
 
-## Deploy on Vercel
+Para usar esta aplicación, necesitarás lo siguiente:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- **Telegram**:
+  - Accede a telegram y busca "@pdfgram_demo_bot" para suscribirte y comenzar a recibir los PDF a tu cuenta (Opcional)
+  
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/pages/building-your-application/deploying) for more details.
+---
+## **Uso**
+El programa enseña al usuario 2 inputs y 4 botones:
+
+- **Número de referencia**: Sirve para introducir sólo cuatro números del número de referencia (Usualmente por comodidad se coloca los 4 últimos)
+- **Monto**:Sirve para colocar el monto en Bs del número de referencia
+- **Añadir**: Además de crear una tabla con la información construida en los inputs, permite añadir información introducida en los inputs
+- **Descargar**: Como su nombre lo dice, este descarga la tabla actual que muestra al cliente
+- **Vaciar**: Vacía la tabla actual para colocar nuevos datos
+- **Enviar**: Este botón envía la tabla al bot de telegram. Una vez se haya enviado, la tabla se reinicia
+
+Al pulsar el botón de enviar los datos viajan al backend para ser procesados como una tabla en PDF y luego ser exportada. Esta tabla contiene información como el número de referencia, monto y hora de la transacción, y al final un campo llamado "Total" hace la suma de todos los montos para dar el total de todas las transacciones.
+
+El resultado de todo el proceso hecho sería el siguiente:
+
+![Texto alternativo](/example.jpg "Título alternativo")

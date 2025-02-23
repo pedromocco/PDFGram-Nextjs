@@ -1,6 +1,6 @@
-import { bot, chatIds } from "../utils/bot";
-import { generatePDF } from "../utils/pdfGenerator";
-import { ensureDirectoryExists } from "../utils/utils";
+import { bot, chatIds } from "../../../utils/bot";
+import { generatePDF } from "../../../utils/pdfGenerator";
+import { ensureDirectoryExists } from "../../../utils/utils";
 import path from "path";
 const fs = require("fs");
 

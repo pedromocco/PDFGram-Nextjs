@@ -1,4 +1,4 @@
-import { bot } from "../utils/bot";
+import { bot } from "../../../utils/bot";
 
 export default function handler(req, res) {
   bot.launch();

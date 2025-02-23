@@ -2,8 +2,7 @@ const { Telegraf } = require("telegraf");
 const fs = require("fs");
 const path = require("path");
 
-const apikey = "7577316024:AAFN_xEGFHIoZF23ZNoIAwyu_92YOAa6PC8"
-const bot = new Telegraf(apikey);
+const bot = new Telegraf(process.env.NEXT_TELEGRAM_BOT_TOKEN);
 const chatIdsPath = path.join(process.cwd(), "chatIds.json");
 
 // Cargar IDs de chat desde un archivo
