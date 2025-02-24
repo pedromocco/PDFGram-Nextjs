@@ -17,7 +17,7 @@ bot.start((ctx) => {
   if (!chatIds.includes(chatId)) {
     chatIds.push(chatId);
     fs.writeFileSync(chatIdsPath, JSON.stringify(chatIds));
-    ctx.reply("Te has suscrito para recibir el PDF.");
+    ctx.reply("Te has suscrito para recibir el PDF. Usa el comando /leave para darte de baja.");
   } else {
     ctx.reply("Ya estás suscrito para recibir el PDF.");
   }
