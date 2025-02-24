@@ -1,8 +1,16 @@
 import { useState, useEffect } from "react";
-import { Footer, Button, Modal, Toast, Table, TextInput } from "flowbite-react";
+import {
+  Footer,
+  Button,
+  Modal,
+  Toast,
+  Table,
+  TextInput,
+  Banner,
+} from "flowbite-react";
 import { HiCheck, HiExclamation, HiX } from "react-icons/hi";
+import { FaTelegramPlane } from "react-icons/fa";
 import { FaTrash } from "react-icons/fa";
-
 
 export default function Home() {
   const [data, setData] = useState([]);
@@ -28,9 +36,8 @@ export default function Home() {
       setData(JSON.parse(storedData));
       setShowTable(true);
     }
-
   }, []);
-  
+
   const handleDelete = (recordToDelete) => {
     const updatedData = data.filter(
       (record) => record.ref !== recordToDelete.ref
@@ -177,7 +184,7 @@ export default function Home() {
 
   return (
     <div className="flex flex-col items-center justify-center my-4 p-2">
-      <div className="relative inline-block">
+      <div className="relative inline-block mt-5">
         <span className="text-5xl font-bold">PDFgram</span>
         <span className="absolute -bottom-3 left-0 w-full h-1 bg-gradient-to-r from-blue-500 via-cyan-400 to-indigo-600 rounded-full"></span>
       </div>
@@ -373,6 +380,32 @@ export default function Home() {
           <Footer.Copyright by="Pedro Moccó" year={2025} />
         </Footer>
       </div>
+
+      <Banner>
+        <div className="flex w-full justify-between border-b border-gray-200 bg-gray-50 p-4 dark:border-gray-600 dark:bg-gray-700 mt-4">
+          <div className="mx-auto flex items-center">
+            <p className="flex items-center text-sm font-normal text-gray-500 dark:text-gray-400">
+              <FaTelegramPlane className="h-5 w-5 mr-2" />
+              <span className="[&_p]:inline">
+                Suscribete al bot de Telegram para comenzar a recibir tus reportes&nbsp;
+                <a
+                  href="https://web.telegram.org/k/#@pdfgram_demo_bot"
+                  target="_blank" rel="noopener noreferrer"
+                  className="inline font-medium text-cyan-600 underline decoration-solid underline-offset-2 hover:no-underline dark:text-cyan-500"
+                >
+                  aquí
+                </a>
+              </span>
+            </p>
+          </div>
+          <Banner.CollapseButton
+            color="gray"
+            className="border-0 bg-transparent text-gray-500 dark:text-gray-400"
+          >
+            <HiX className="h-4 w-4" />
+          </Banner.CollapseButton>
+        </div>
+      </Banner>
     </div>
   );
 }
