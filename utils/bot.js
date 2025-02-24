@@ -5,13 +5,11 @@ const path = require("path");
 const bot = new Telegraf(process.env.NEXT_TELEGRAM_BOT_TOKEN);
 const chatIdsPath = path.join(process.cwd(), "chatIds.json");
 
-// Cargar IDs de chat desde un archivo
 let chatIds = [];
 if (fs.existsSync(chatIdsPath)) {
   chatIds = JSON.parse(fs.readFileSync(chatIdsPath));
 }
 
-// Comando /start
 bot.start((ctx) => {
   const chatId = ctx.chat.id;
   if (!chatIds.includes(chatId)) {
@@ -23,7 +21,6 @@ bot.start((ctx) => {
   }
 });
 
-// Comando /leave
 bot.command("leave", (ctx) => {
   const chatId = ctx.chat.id;
   chatIds = chatIds.filter((id) => id !== chatId);

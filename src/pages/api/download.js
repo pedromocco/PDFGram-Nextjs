@@ -4,13 +4,10 @@ import fs from "fs";
 import path from "path";
 import os from "os";
 
-// Función para determinar la ruta correcta según el entorno
 function getRecordsPath() {
   if (process.env.NODE_ENV === "production") {
-    // En producción (Vercel/AWS Lambda), usa el directorio temporal del sistema
     return path.join(os.tmpdir(), "userData", "records");
   } else {
-    // En desarrollo local, usa la carpeta userData/records en la raíz del proyecto
     return path.join(process.cwd(), "userData", "records");
   }
 }

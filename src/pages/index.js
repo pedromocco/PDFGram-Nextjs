@@ -99,7 +99,6 @@ export default function Home() {
   };
   const downloadData = async () => {
     try {
-      // Realiza la solicitud POST al backend
       const response = await fetch("api/download", {
         method: "POST",
         headers: {
@@ -121,20 +120,17 @@ export default function Home() {
         throw new Error("Error al descargar el archivo");
       }
 
-      // Convierte la respuesta en un blob (archivo binario)
       const blob = await response.blob();
 
-      // Crea un enlace temporal para descargar el archivo
       const url = window.URL.createObjectURL(blob);
       const a = document.createElement("a");
       a.href = url;
       a.download = `Registro de pago movil ${
         new Date().toISOString().split("T")[0]
-      }.pdf`; // Nombre del archivo
+      }.pdf`;
       document.body.appendChild(a);
       a.click();
 
-      // Limpia el enlace temporal
       window.URL.revokeObjectURL(url);
       a.remove();
     } catch (error) {
